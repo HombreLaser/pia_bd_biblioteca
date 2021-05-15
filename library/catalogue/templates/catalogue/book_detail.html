@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% if error_message %}<p><strong>{{ error_message }}</p></strong>{% endif %}
+
+{% block content %}
+<ul>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="column" style="height:340px;width:240px;padding:1px;">
+	<img src="/static/media/{{ book.cover.url }}" style="width:240px;height:340px;">
+      </div>
+      <div class="column">
+	<div id="descriptorField" class="row">
+	  <p><strong>Título</strong></p>
+	</div>
+	<div style="height:60px;width:998px;" class="row">
+	  <p id="title">{{ book.title }}</p>
+	</div>
+	<div id="descriptorField" class="row">
+	  <strong>Datos</strong>
+	</div>
+	<div style="width:998px" class="row">
+	  <div class="info-box">
+	    <strong>Autor: </strong><a href="{% url 'catalogue:author' book.author.id %}">{{ book.author.name}}<br></a>
+	    <strong>Editor: </strong>{{ book.editor.name }}<br>
+	    <strong>Año: </strong>{{ book.year}}<br>
+	    <strong>País: </strong>{{ book.country}}<br>
+	    <strong>Género: </strong>{{ book.genre }}<br>
+	    <strong>ISBN: </strong>{{ book.isbn }}<br>
+	  </div>
+	</div>
+	<div id="descriptorField" class="row">
+	  <strong>Sinopsis</strong>
+	</div>
+	<div style="width:998px" class="row">
+	  {{ book.summary }}
+	</div>
+      </div>
+    </div>
+  </div>
+</ul>
+{% endblock %}
