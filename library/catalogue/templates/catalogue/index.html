@@ -4,11 +4,21 @@
 {% block content %}
 {% if book_list %}
 <ul>
-  {% for book in book_list %}
-  <li>{{ book.title }}</li>
-  <li>{{ book.author.name }}</li>
-  <img src="/media{{ book.cover.url }}" alt="{{ book.title }}-cover"/>
-  {% endfor %}
+  <div class="container-fluid">
+    {% for book in book_list %}
+    <div class="row">
+      <div class="column" style="padding:4px;">
+	<img src="/static/media/{{ book.cover.url }}" style="width:180px;height:230px;">
+      </div>
+      <div class="column" style="height:300px;width:1000px">
+	<a href="{% url 'catalogue:book' book.isbn %}"><p style="color:blue;font-size:40px;"><strong>{{ book.title }}</strong></p></a>
+	<p id="description"><strong>Autor: </strong>{{ book.author.name }}</p>
+	<p id="description"><strong>País: </strong>{{ book.country }}</p>
+	<p id="description"><strong>Año: </strong>{{ book.year }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </ul>
 {% else %}
 <p>La búsqueda no arrojó resultado</p>

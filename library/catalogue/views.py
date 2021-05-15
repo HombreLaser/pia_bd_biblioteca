@@ -11,7 +11,12 @@ from .models import Book, Author, Editor
 class IndexView(generic.ListView):
     template_name = 'catalogue/index.html'
     context_object_name = 'book_list'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
-        return Book.objects.order_by('-title')
+        return Book.objects.order_by('title')
+
+
+class BookDetailView(generic.DetailView):
+    template_name='catalogue/book_detail.html'
+    model = Book
