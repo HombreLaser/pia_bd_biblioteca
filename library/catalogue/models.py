@@ -51,8 +51,8 @@ class Author(models.Model):
     """La entidad autor, con nombre, país y una imagen suya."""
     name = models.CharField(max_length=128)
     country = models.CharField(max_length=128)
-    photo = models.ImageField()
-
+    photo = models.ImageField()    
+    
     def __str__(self):
         return f"Nombre:{self.name}\nPaís:{self.country}\n"
 
