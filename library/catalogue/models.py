@@ -71,6 +71,7 @@ class Book(models.Model):
     country = models.CharField(max_length=128)
     genre = models.CharField(max_length=128)
     cover = models.ImageField()
+    summary = models.TextField(default="Sinopsis")
 
     def __str__(self):
         return self.title
