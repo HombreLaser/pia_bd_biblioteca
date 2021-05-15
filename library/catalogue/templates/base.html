@@ -17,23 +17,42 @@
 	      <img src="/static/media/tres castillos-2.png" alt="Logo-tres-castillos" style="height:150px;width:150px;">
 	    </div>
 	  </div>
-	  <div class="row">
-	    <div class="column">
+	  <div class="row" style="height=40px;width=500px;">
+	    <div class="col align-self-center" style="position:height:40px;">
 	      <form action="{% url 'catalogue:index' %}" method="get">
-		<input name="search" type="text" placeholder="Search...">
+		<div class="form-group">
+		  <label for="search" class="col">Buscar por...</label>
+		  <select name="type" class="form-control">
+		    <option value="title"> Título </option>
+		    <option value="author"> Autor </option>
+		    <option value="year"> Año </option>
+		    <option value="country"> País </option>
+		    <option value="genre"> Género </option>
+		  </select>
+		</div>
+		<div class="form-group">
+		  <div class="col" style="padding:3px;">
+		    <input type="text" class="form-control" id="search" name="search" placeholder="Introduzca su búsqueda">
+		  </div>
+		</div>
+		<div class="form-group">
+		  <div class="col-sm-offset-2 col-sm-10" style="padding:3px;">
+		    <button type="submit" class="btn btn-primary">Buscar</button>
+		  </div>
+		</div>
 	      </form>
-	    </div>
+	    </div >
 	  </div>
 	</div>
 	<div class="row">
-	  <div style="background:#9adafc;border: 3px solid #1268f3;width:180px;" class="col-sm-2">
+	  <div style="background:#dedede;border: 3px solid #1268f3;width:258px;" class="col-sm-2">
 	    {% block sidebar %}
 	    <ul class="sidebar-nav">
 	      <li class="nav-item" style="padding:10px;">
-		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-book-half" viewBox="0 0 16 16">
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="blue" class="bi bi-book-half" viewBox="0 0 16 16">
 		  <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
 		</svg>
-		<a href="{% url 'catalogue:index' %}">Catálogo</a>
+		<a href="{% url 'catalogue:index' %}" style="font-size:24px;">Catálogo</a>
 	      </li>
 	    </ul>
 	    {% endblock %}

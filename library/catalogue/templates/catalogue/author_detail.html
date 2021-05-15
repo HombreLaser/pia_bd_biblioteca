@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% if error_message %}<p><strong>{{ error_message }}</p></strong>{% endif %}
+
+{% block content %}
+<ul>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="column" style="height:340px;width:240px;padding:1px;">
+	<img src="/static/media/{{ author.photo.url }}" style="width:240px;height:340px;">
+      </div>
+      <div class="column">
+	<div id="descriptorField" class="row">
+	  <p><strong>Autor</strong></p>
+	</div>
+	<div style="height:60px;width:998px;" class="row">
+	  <div class="col">
+	    <div class="info-box">
+	      <strong>Nombre: </strong>{{ author.name }} <br>
+	      <strong>País: </strong>{{ author.country}} <br>
+	      <hr>
+	      <strong>Obras: </strong>
+	    </div>
+	    {% if book_list %}
+	    <div class="row">
+	      <div class="col">
+		{% for book in book_list %}
+		<a href="{% url 'catalogue:book' book.isbn %}"><p style="font-size:20px;">{{ book.title }}</p></a>
+		{% endfor %}
+	      </div>
+	    </div>
+	    {% endif %}
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</ul>
+{% endblock %}
