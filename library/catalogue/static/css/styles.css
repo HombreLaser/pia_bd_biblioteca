@@ -2,4 +2,39 @@
     margin-top: 20px;
     padding: 0;
     list-style: none;
+    background: ;
 }
+
+.column {
+    float: left;
+    width: 12%;
+}
+
+.cover {
+    object-fit: cover;
+}
+
+.info-box {
+    font-size: 20px;
+    text-align: left;
+}
+
+#description {
+    font-size: 25px;
+}
+
+#title {
+    font-size: 40px;
+    text-align: center;
+}
+
+#descriptorField {
+    background-color: #cbd9e2;
+    border: 3px solid: #738fa3;
+    font-size: 40px;
+    text-align: center;
+    height:50px;
+    width:998px;
+}
+
+
