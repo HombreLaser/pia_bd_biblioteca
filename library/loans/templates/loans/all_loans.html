@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="column">
+  <form action="{% url 'loans:all_loans' %}" method="get">
+    <div class="form-group">
+      <label for="search" class="col">Buscar por...</label>
+      <select name="type" class="form-control">
+	<option value="uuid"> UUID </option>
+	<option value="user"> Usuario </option>
+	<option value="id"> Id de préstamo </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <div class="col" style="padding:3px;">
+	<input type="text" class="form-control" id="search" name="search" placeholder="Introduzca su búsqueda">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10" style="padding:3px;">
+	<button type="submit" class="btn btn-primary">Buscar</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <ul>
+      {% if loans_list %}
+      {% for loan in loans_list %}
+      <li style="font-size:24px">
+	{{ loan.borrower.username }} <a href="{% url 'catalogue:book' loan.borrowed_book.book.isbn %}">{{ loan.borrowed_book.book.title }}</a>
+	  <p {% if loan.is_overdue %}class="text-danger"{% endif %}>{{ loan.expires }}</p>
+	  <form action="{% url 'loans:return' loan.id %}" method="post">
+	      {% csrf_token %}
+	      <button name="return_button" value="mark_returned">Regresar</button>
+	  </form>
+	  <form action="{% url 'loans:renewal' loan.id %}" method="post">
+	      {% csrf_token %}
+	      <button name="renew_button" value="renew_loan">Renovar</button>
+	  </form>
+      </li >
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% block pagination %}
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">&laquo; Primera</a>
+    <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+    
+    <span class="current">
+      Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+    </span>
+    
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+    {% endif %}
+  </span>
+</div>
+{% endblock %}
+{% else %}
+<p style="font-size:28px;" class="text-danger">No hay préstamos disponibles</p>
+{% endif %}
+{% endblock %}

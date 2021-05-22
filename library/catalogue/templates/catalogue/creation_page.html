@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul style="font-size:24px;">
+    <li>
+	<a href="{% url 'catalogue:new_author' %}">Nuevo autor</a>
+    </li>
+    <li>
+	<a href="{% url 'catalogue:new_book' %}">Nuevo libro</a>
+    </li>
+    <li>
+	<a href="{% url 'catalogue:new_editor' %}">Nueva editorial</a>
+    </li>
+    <hr>
+    <p>Direcciones</p>
+    <li>
+	<a href="{% url 'catalogue:new_address' %}">Nueva dirección</a>
+    </li>
+    <li>
+	<a href="{% url 'catalogue:new_city' %}">Nueva ciudad</a>
+    </li>
+    <li>
+	<a href="{% url 'catalogue:new_street' %}">Nueva calle</a>
+    </li>
+    <li>
+	<a href="{% url 'catalogue:new_pc' %}">Nuevo código postal</a>
+    </li>
+</ul>
+{% endblock %}

@@ -4,6 +4,7 @@
 
 {% block content %}
 <ul>
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
   <div class="container-fluid">
     <div class="row">
       <div class="column" style="height:340px;width:240px;padding:1px;">
@@ -36,6 +37,21 @@
 	  {{ book.summary }}
 	</div>
       </div>
+      <strong>Copias:</strong>
+      {% for copy in book_instances %}
+      <ul>
+	<li>
+	  {{ copy.id }}<br>
+	  Estado: {{ copy.status }}
+	  {% if copy.is_available %}
+	  <form action="{% url 'loans:loan' copy.id %}" method="post">
+	    {% csrf_token %}
+	     <button name="loan_button" value="make_loan"> Pedir prestado</button>
+	  </form>
+	  {% endif %}
+	</li>
+      </ul>
+      {% endfor %}
     </div>
   </div>
 </ul>
