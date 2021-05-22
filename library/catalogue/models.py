@@ -3,6 +3,9 @@ from django.db import models
 # Modelos (entidades en la base de datos).
 class PostalCode(models.Model):
     """La entidad código postal para la dirección."""
+    class Meta:
+        permissions = [('añadir_cp', 'Añadir y editar un código postal')]
+
     code = models.CharField(primary_key=True, max_length=12)
 
     def __str__(self):
@@ -11,6 +14,9 @@ class PostalCode(models.Model):
 
 class City(models.Model):
     """La entidad ciudad para la dirección."""
+    class Meta:
+        permissions = [('añadir_ciudad', 'Añadir y editar una ciudad')]
+
     name = models.CharField(max_length=128)
 
     def __str__(self):
@@ -19,8 +25,11 @@ class City(models.Model):
 
 class Street(models.Model):
     """La entidad calle para la dirección."""
-    name = models.CharField(max_length=128)
+    class Meta:
+        permissions = [('añadir_calle', 'Añadir y editar una calle')]
 
+    name = models.CharField(max_length=128)
+        
     def __str__(self):
         return self.name
 
@@ -28,6 +37,9 @@ class Street(models.Model):
 class Address(models.Model):
     """La entidad dirección, que referencía a otras entidades calle, ciudad,
     código postal."""
+    class Meta:
+        permissions = [('añadir_dir', 'Añadir y editar dirección')]
+
     street = models.ForeignKey(Street, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     postal_code = models.ForeignKey(PostalCode, on_delete=models.CASCADE)
@@ -39,6 +51,10 @@ class Address(models.Model):
 
 class Editor(models.Model):
     """La entidad editorial con su nombre y dirección."""
+    class Meta:
+        permissions = [('añadir_editor', 'Añadir y editar un editor.')]
+
+
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
     country = models.CharField(max_length=128)
@@ -49,6 +65,9 @@ class Editor(models.Model):
 
 class Author(models.Model):
     """La entidad autor, con nombre, país y una imagen suya."""
+    class Meta:
+        permissions = [('añadir_autor', 'Añadir y editar un autor.')]
+
     name = models.CharField(max_length=128)
     country = models.CharField(max_length=128)
     photo = models.ImageField()    
@@ -63,6 +82,9 @@ class Book(models.Model):
     editorial como foránea y otros atributos
     misceláneos como el título, fecha de publicación,
     etc."""
+    class Meta:
+        permissions = [('añadir_libro', 'Añadir y editar un libro.')]
+
     isbn = models.CharField(max_length=13, primary_key=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     editor = models.ForeignKey(Editor, on_delete=models.CASCADE)
